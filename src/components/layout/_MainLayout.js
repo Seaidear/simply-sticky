@@ -8,7 +8,7 @@ const MainLayout = ({ children }) => {
       <header>
         <Navbar />
       </header>
-      <main className="container">{children}</main>
+      <main>{children}</main>
       <Footer />
     </div>
   );
