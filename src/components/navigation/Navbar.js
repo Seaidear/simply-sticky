@@ -4,14 +4,14 @@ import logo from '../../assets/logo.png';
 const Navbar = () => (
   <nav>
     <div className="nav-wrapper container">
-      <a href="#" className="brand-logo">
+      <a href="#" className="brand-logo" style={{ width: '100%' }}>
         <img
           src={logo}
-          alt="Notes"
+          alt="Noteworthy"
           style={{ display: 'inline', width: '1.75rem' }}
           width="1.75rem"
         />{' '}
-        Notes
+        Noteworthy
       </a>
       <ul class="right hide-on-med-and-down">
         <li>

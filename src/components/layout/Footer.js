@@ -6,9 +6,9 @@ const Footer = () => {
       <div className="container">
         <div className="row">
           <div className="col l6 s12">
-            <h5 className="white-text">Notes</h5>
+            <h5 className="white-text">Noteworthy</h5>
             <p className="grey-text text-lighten-4">
-              A serverless Notes-app that let's you organize your thoughts.
+              Make notes and organize your thoughts.
             </p>
           </div>
         </div>
