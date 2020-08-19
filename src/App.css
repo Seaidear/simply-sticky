@@ -8,6 +8,37 @@
   box-sizing: inherit;
 }
 
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #ee6e73 #f4f4f4;
+}
+
+*::-webkit-scrollbar {
+  width: 0.5rem;
+  transition: all 0.3s ease-out;
+}
+
+*::-webkit-scrollbar:hover {
+  width: 1rem;
+}
+
+*::-webkit-scrollbar-track {
+  background: #f4f4f4;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #ee6e72c4;
+  border-radius: 2rem;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #ee6e72c4;
+}
+
+body {
+  overflow-x: hidden;
+}
+
 #wrapper {
   display: flex;
   min-height: 100vh;
@@ -19,6 +50,20 @@ main {
   align-items: stretch;
   justify-content: center;
   flex: 1 0 auto;
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.brand-logo h1 {
+  font-size: 1.65rem !important;
+  display: inline;
+  margin: 0;
+  padding: 0;
 }
 
 .hero-img {
@@ -42,10 +87,10 @@ main {
   text-align: center;
 }
 
-@media only screen and (max-width: 992px) {
-  nav .brand-logo {
-    position: relative;
-    display: block;
-    text-align: center;
-  }
+.button-group * ~ * {
+  margin-left: 1rem;
+}
+
+.card-content {
+  overflow-wrap: break-word;
 }
