@@ -6,9 +6,14 @@ const Footer = () => {
       <div className="container">
         <div className="row">
           <div className="col l6 s12">
-            <h5 className="white-text">Noteworthy</h5>
+            <h5 className="white-text">About Noteworthy</h5>
             <p className="grey-text text-lighten-4">
-              Make notes and organize your thoughts. The easy way.
+              Make notes and organize your thoughts. The easy way. <br />
+              <br />
+              Noteworthy was built on a modern serverless architecture utilizing
+              Netlify cloud functions. Its user interface was built with a focus
+              on ease-of-use using the CSS framework Materialize, which is
+              adhering to Material design guidelines.
             </p>
           </div>
         </div>
