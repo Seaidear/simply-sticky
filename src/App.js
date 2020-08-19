@@ -7,18 +7,43 @@ import NotFound from './pages/NotFound';
 import data from './_data';
 import EditNote from './pages/EditNote';
 import Note from './pages/Note';
+import netlifyIdentity from 'netlify-identity-widget';
 import './App.css';
+
+const netlifyAuth = {
+  isAuthenticated: false,
+  user: null,
+  authenticate(callback) {
+    this.isAuthenticated = true;
+    netlifyIdentity.open();
+    netlifyIdentity.on('login', (user) => {
+      this.user = user;
+      callback(user);
+    });
+  },
+  signout(callback) {
+    this.isAuthenticated = false;
+    netlifyIdentity.logout();
+    netlifyIdentity.on('logout', () => {
+      this.user = null;
+      callback();
+    });
+  },
+};
 
 function App() {
   const [notes, setNotes] = useState(data);
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const login = () => {
-    setIsAuthenticated(true);
+    netlifyAuth.authenticate();
+    if (netlifyIdentity.currentUser()) {
+      setIsAuthenticated(true);
+    }
   };
 
   const logout = () => {
-    setIsAuthenticated(false);
+    netlifyAuth.signout(setIsAuthenticated(false));
   };
 
   const addNote = (note) => {
