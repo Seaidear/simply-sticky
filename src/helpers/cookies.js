@@ -1,7 +1,7 @@
 function initCookieBanner() {
   const showCookieAlert = () => {
     const template = `
-      <div id="cookie-info" class="cookie-banner">
+      <div id="cookie-info" class="cookie-banner animate__animated animate__fadeIn">
         <div class="cookie-banner__content">
           <div class="cookie-banner__text">This website uses cookies. If you continue to use the website, we assume your consent.</div>
           <div class="cookie-banner__buttons">
