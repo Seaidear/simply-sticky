@@ -8,7 +8,7 @@ const Navbar = ({ isAuthenticated, login, logout, register, user }) => {
       <nav>
         <div className="container">
           <div className="row">
-            <div className="col s9 m6">
+            <div className="col s9 m4">
               <Link
                 to="/"
                 className="brand-logo left"
@@ -17,17 +17,18 @@ const Navbar = ({ isAuthenticated, login, logout, register, user }) => {
                 <img
                   src={logo}
                   alt="Noteworthy"
-                  style={{ width: '1.5rem' }}
-                  width="1.5rem"
+                  style={{ width: '1.75rem' }}
+                  width="1.75rem"
                 />{' '}
                 <h1>Noteworthy</h1>
               </Link>
             </div>
-            <div className="col s3 m6">
+            <div className="col s3 m8">
               <ul className="right button-group">
                 {user && (
                   <li className="hide-on-med-and-down">
-                    Welcome back, {user.user_metadata.full_name}
+                    Welcome back,{' '}
+                    <strong>{user.user_metadata.full_name}</strong>
                   </li>
                 )}
                 <li>
@@ -54,8 +55,8 @@ const Navbar = ({ isAuthenticated, login, logout, register, user }) => {
                 <img
                   src={logo}
                   alt="Noteworthy"
-                  style={{ width: '1.5rem' }}
-                  width="1.5rem"
+                  style={{ width: '1.75rem' }}
+                  width="1.75rem"
                 />{' '}
                 <h1>Noteworthy</h1>
               </Link>
