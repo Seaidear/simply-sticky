@@ -2,13 +2,13 @@ import React from 'react';
 import logo from '../../assets/logo.png';
 import { Link } from 'react-router-dom';
 
-const Navbar = ({ isAuthenticated, login, logout }) => {
+const Navbar = ({ isAuthenticated, login, logout, register, user }) => {
   if (isAuthenticated)
     return (
       <nav>
         <div className="container">
           <div className="row">
-            <div className="col s9">
+            <div className="col s9 m6">
               <Link
                 to="/"
                 className="brand-logo left"
@@ -23,8 +23,13 @@ const Navbar = ({ isAuthenticated, login, logout }) => {
                 <h1>Noteworthy</h1>
               </Link>
             </div>
-            <div className="col s3">
+            <div className="col s3 m6">
               <ul className="right">
+                {user && (
+                  <li className="hide-on-med-and-down">
+                    Welcome back, {user.user_metadata.full_name}
+                  </li>
+                )}
                 <li>
                   <button
                     onClick={logout}
@@ -58,7 +63,10 @@ const Navbar = ({ isAuthenticated, login, logout }) => {
             <div className="col m6">
               <ul className="right hide-on-med-and-down button-group">
                 <li>
-                  <button className="waves-effect waves-light btn">
+                  <button
+                    onClick={register}
+                    className="waves-effect waves-light btn"
+                  >
                     Register
                   </button>
                 </li>

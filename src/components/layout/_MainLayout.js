@@ -2,7 +2,14 @@ import React from 'react';
 import Navbar from '../navigation/Navbar';
 import Footer from './Footer';
 
-const MainLayout = ({ isAuthenticated, children, login, logout }) => (
+const MainLayout = ({
+  isAuthenticated,
+  children,
+  login,
+  logout,
+  register,
+  user,
+}) => (
   <div id="wrapper">
     <div className="full-height">
       <header>
@@ -10,6 +17,8 @@ const MainLayout = ({ isAuthenticated, children, login, logout }) => (
           isAuthenticated={isAuthenticated}
           login={login}
           logout={logout}
+          register={register}
+          user={user}
         />
       </header>
       <main>{children}</main>

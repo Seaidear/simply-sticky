@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import MainLayout from './components/layout/_MainLayout';
 import AddNote from './pages/AddNote';
@@ -6,43 +6,47 @@ import NotFound from './pages/NotFound';
 import data from './_data';
 import EditNote from './pages/EditNote';
 import Note from './pages/Note';
-import netlifyIdentity from 'netlify-identity-widget';
-import './App.css';
+import netlifyIdentity, { currentUser } from 'netlify-identity-widget';
 import Landing from './pages/Landing';
 import Main from './pages/Main';
 import ProtectedRoute from './components/routing/ProtectedRoute';
-
-const netlifyAuth = {
-  isAuthenticated: false,
-  user: null,
-  authenticate(callback) {
-    this.isAuthenticated = true;
-    netlifyIdentity.open();
-    netlifyIdentity.on('login', (user) => {
-      this.user = user;
-      callback(user);
-    });
-  },
-  signout(callback) {
-    this.isAuthenticated = false;
-    netlifyIdentity.logout();
-    netlifyIdentity.on('logout', () => {
-      this.user = null;
-      callback();
-    });
-  },
-};
+import { loginUser, logoutUser } from './helpers/auth';
+import './App.css';
 
 function App() {
   const [notes, setNotes] = useState(data);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    if (currentUser()) {
+      setIsAuthenticated(true);
+      setUser(currentUser());
+    }
+
+    netlifyIdentity.on('login', (user) => {
+      loginUser(user);
+      setIsAuthenticated(true);
+      setUser(user);
+    });
+
+    netlifyIdentity.on('logout', () => {
+      logoutUser();
+      setIsAuthenticated(false);
+      setUser(null);
+    });
+  }, []);
 
   const login = () => {
-    setIsAuthenticated(true);
+    netlifyIdentity.open('login');
   };
 
-  const logout = () => {
-    setIsAuthenticated(false);
+  const register = () => {
+    netlifyIdentity.open('signup');
+  };
+
+  const logout = async () => {
+    await netlifyIdentity.logout();
   };
 
   const addNote = (note) => {
@@ -72,14 +76,20 @@ function App() {
       <MainLayout
         isAuthenticated={isAuthenticated}
         login={login}
+        register={register}
         logout={logout}
+        user={user}
       >
         <Switch>
           <Route
             exact
             path="/"
             render={() => (
-              <Landing isAuthenticated={isAuthenticated} login={login} />
+              <Landing
+                isAuthenticated={isAuthenticated}
+                login={login}
+                register={register}
+              />
             )}
           />
           <ProtectedRoute

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 
-const Landing = ({ isAuthenticated, login }) => {
+const Landing = ({ isAuthenticated, login, register }) => {
   if (isAuthenticated) return <Redirect to="/notes" />;
   else
     return (
@@ -16,7 +16,10 @@ const Landing = ({ isAuthenticated, login }) => {
 
           <div className="row">
             <div className="col s12 m6" style={{ marginBottom: '1rem' }}>
-              <button className="waves-effect waves-light btn-large">
+              <button
+                onClick={register}
+                className="waves-effect waves-light btn-large"
+              >
                 Register
               </button>
             </div>
