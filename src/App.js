@@ -24,6 +24,7 @@ function App() {
       setIsAuthenticated(true);
       setUser(currentUser());
       getNotes();
+      setIsLoading(false);
     }
 
     netlifyIdentity.on('login', (user) => {
@@ -31,6 +32,7 @@ function App() {
       setIsAuthenticated(true);
       setUser(user);
       getNotes();
+      setIsLoading(false);
       netlifyIdentity.close();
     });
 
@@ -54,9 +56,9 @@ function App() {
   };
 
   const getNotes = () => {
-    axios.get('/.netlify/functions/getNotes').then((res) => {
+    const timestamp = new Date().getTime();
+    axios.get(`/.netlify/functions/getNotes?t=${timestamp}`).then((res) => {
       setNotes(res.data);
-      setIsLoading(false);
     });
   };
 
