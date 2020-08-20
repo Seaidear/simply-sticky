@@ -39,7 +39,6 @@ body {
   overflow-x: hidden;
 }
 
-#wrapper,
 .full-height {
   display: flex;
   min-height: 100vh;

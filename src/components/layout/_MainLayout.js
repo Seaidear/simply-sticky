@@ -10,7 +10,7 @@ const MainLayout = ({
   register,
   user,
 }) => (
-  <div id="wrapper">
+  <div className="full-height">
     <div className="full-height">
       <header>
         <Navbar
