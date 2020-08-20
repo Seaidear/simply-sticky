@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import netlifyIdentity from 'netlify-identity-widget';
+import initCookieBanner from './helpers/cookies';
 
 // Auto-init all Materialize JS widgets
 window.M.AutoInit();
@@ -10,6 +11,10 @@ window.M.AutoInit();
 // Init netlify identity widget
 netlifyIdentity.init();
 
+// Init cookie banner
+initCookieBanner();
+
+// Render React-App
 ReactDOM.render(
   <React.StrictMode>
     <App />
@@ -17,4 +22,5 @@ ReactDOM.render(
   document.getElementById('root'),
 );
 
+// Register service worker (enable PWA)
 serviceWorker.register();

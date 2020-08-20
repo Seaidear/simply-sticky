@@ -119,3 +119,51 @@ main {
 .card-action .del-btn {
   margin-left: auto;
 }
+
+.cookie-banner {
+  background-color: rgba(245, 245, 245, 0.9);
+  padding: 0.5em;
+  font-size: 0.9rem;
+  text-align: center;
+  width: 100%;
+  max-width: 600px;
+  margin: 2rem auto;
+  display: flex;
+  border-radius: 0.5rem;
+  box-shadow: 0 6px 12px -2px rgba(50, 50, 93, 0.25),
+    0 3px 7px -3px rgba(0, 0, 0, 0.3);
+}
+
+.cookie-banner__content {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.cookie-banner__text {
+  padding: 1em;
+  text-align: left;
+  width: 60%;
+}
+
+.cookie-banner__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  width: 40%;
+}
+
+@media screen and (max-width: 624px) {
+  .cookie-banner__content {
+    flex-direction: column;
+  }
+
+  .cookie-banner__text,
+  .cookie-banner__buttons {
+    text-align: center;
+    width: 100%;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+}
