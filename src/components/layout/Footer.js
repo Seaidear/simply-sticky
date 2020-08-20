@@ -16,6 +16,27 @@ const Footer = () => {
               adhering to Material design guidelines.
             </p>
           </div>
+          <div class="col l4 offset-l2 s12">
+            <h5 class="white-text">Links</h5>
+            <ul>
+              <li>
+                <a
+                  class="grey-text text-lighten-3 modal-trigger"
+                  href="#impress-modal"
+                >
+                  Impress
+                </a>
+              </li>
+              <li>
+                <a
+                  class="grey-text text-lighten-3 modal-trigger"
+                  href="#privacy-modal"
+                >
+                  Privacy Policy
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
       <div className="footer-copyright">
