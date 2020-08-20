@@ -107,3 +107,16 @@ main {
 .card-content {
   overflow-wrap: break-word;
 }
+
+.card-action {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.card-action * ~ * {
+  margin-left: 1rem;
+}
+
+.card-action .del-btn {
+  margin-left: auto;
+}

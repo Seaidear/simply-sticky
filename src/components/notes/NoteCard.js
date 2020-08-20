@@ -20,7 +20,7 @@ const NoteCard = ({ note, deleteNote, history }) => {
             to={`/note/${note.id}`}
             className="waves-effect waves-light grey-text text-darken-4 grey lighten-3 btn-small"
           >
-            View
+            <i className="small material-icons">remove_red_eye</i>
           </Link>
           {'  '}
           <button
@@ -29,7 +29,7 @@ const NoteCard = ({ note, deleteNote, history }) => {
             }}
             className="waves-effect waves-light btn-small"
           >
-            Edit
+            <i className="small material-icons">edit</i>
           </button>
           {'  '}
           <button
@@ -37,9 +37,9 @@ const NoteCard = ({ note, deleteNote, history }) => {
               e.preventDefault();
               deleteNote(note.id);
             }}
-            className="waves-effect waves-light red darken-2 btn-small"
+            className="waves-effect waves-light red darken-2 btn-small del-btn"
           >
-            Delete
+            <i className="material-icons">delete</i>
           </button>
         </div>
         <div className="right">
