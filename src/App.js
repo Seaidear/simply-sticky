@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import MainLayout from './components/layout/_MainLayout';
 import AddNote from './pages/AddNote';
 import NotFound from './pages/NotFound';
-import data from './_data';
 import EditNote from './pages/EditNote';
 import Note from './pages/Note';
 import netlifyIdentity, { currentUser } from 'netlify-identity-widget';
@@ -12,9 +11,10 @@ import Main from './pages/Main';
 import ProtectedRoute from './components/routing/ProtectedRoute';
 import { loginUser, logoutUser } from './helpers/auth';
 import './App.css';
+import axios from 'axios';
 
 function App() {
-  const [notes, setNotes] = useState(data);
+  const [notes, setNotes] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState(null);
 
@@ -22,12 +22,14 @@ function App() {
     if (currentUser()) {
       setIsAuthenticated(true);
       setUser(currentUser());
+      getNotes();
     }
 
     netlifyIdentity.on('login', (user) => {
       loginUser(user);
       setIsAuthenticated(true);
       setUser(user);
+      getNotes();
       netlifyIdentity.close();
     });
 
@@ -48,6 +50,10 @@ function App() {
 
   const logout = async () => {
     await netlifyIdentity.logout();
+  };
+
+  const getNotes = () => {
+    axios.get('/.netlify/functions/getNotes').then((res) => setNotes(res.data));
   };
 
   const addNote = (note) => {
