@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 
 const Landing = ({ isAuthenticated, login, register }) => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   if (isAuthenticated) return <Redirect to="/notes" />;
   else
     return (

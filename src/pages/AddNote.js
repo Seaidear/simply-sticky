@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { generateUUID } from '../helpers/uuid';
 
@@ -6,6 +6,10 @@ const AddNote = ({ addNote }) => {
   const [submitted, setSubmitted] = useState(false);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   if (submitted) return <Redirect to="/notes" />;
   else

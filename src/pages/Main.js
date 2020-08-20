@@ -8,6 +8,8 @@ const Main = ({ notes, deleteNote }) => {
     fixedActionBtn.classList.remove('scale-out');
     fixedActionBtn.classList.add('scale-în');
     window.M.Tooltip.init(fixedActionBtn);
+
+    window.scrollTo(0, 0);
   }, []);
 
   return (

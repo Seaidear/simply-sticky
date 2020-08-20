@@ -14,6 +14,9 @@ const EditNote = ({ notes, editNote, match }) => {
       setTitle(note.title);
       setContent(note.content);
     }
+
+    window.scrollTo(0, 0);
+
     // eslint-disable-next-line
   }, []);
 

@@ -13,6 +13,9 @@ const Note = ({ notes, match, history, deleteNote }) => {
       setTitle(note.title);
       setContent(note.content);
     }
+
+    window.scrollTo(0, 0);
+
     // eslint-disable-next-line
   }, []);
 
