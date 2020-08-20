@@ -8,7 +8,6 @@ import netlifyIdentity from 'netlify-identity-widget';
 window.M.AutoInit();
 
 // Init netlify identity widget
-window.netlifyIdentity = netlifyIdentity;
 netlifyIdentity.init();
 
 ReactDOM.render(
