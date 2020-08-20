@@ -125,6 +125,7 @@ main {
   padding: 0.5em;
   font-size: 0.9rem;
   text-align: center;
+  pointer-events: all;
   width: 100%;
   max-width: 600px;
   margin: 2rem auto;

@@ -19,6 +19,7 @@ function initCookieBanner() {
     wrapper.style.width = '100%';
     wrapper.style.zIndex = 998;
     wrapper.style.textAlign = 'center';
+    wrapper.style.pointerEvents = 'none';
     wrapper.innerHTML = template;
     document.body.appendChild(wrapper);
 
