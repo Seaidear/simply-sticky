@@ -28,7 +28,7 @@ const Navbar = ({ isAuthenticated, login, logout }) => {
                 <li>
                   <button
                     onClick={logout}
-                    className="waves-effect waves-light btn grey-text text-darken-4 grey lighten-3"
+                    className="waves-effect waves-light btn-flat grey-text text-lighten-4"
                   >
                     Logout
                   </button>
@@ -65,7 +65,7 @@ const Navbar = ({ isAuthenticated, login, logout }) => {
                 <li>
                   <button
                     onClick={login}
-                    className="waves-effect waves-light btn grey-text text-darken-4 grey lighten-3"
+                    className="waves-effect waves-light btn-flat grey-text text-lighten-4"
                   >
                     Login
                   </button>
