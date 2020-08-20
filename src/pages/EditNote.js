@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Redirect, Link, withRouter } from 'react-router-dom';
+import { Link, withRouter, Redirect } from 'react-router-dom';
 
-const EditNote = ({ isAuthenticated, notes, editNote, match }) => {
+const EditNote = ({ notes, editNote, match }) => {
   const id = match.params.id;
   const note = notes.find((note) => note.id === id);
 
@@ -17,7 +17,7 @@ const EditNote = ({ isAuthenticated, notes, editNote, match }) => {
     // eslint-disable-next-line
   }, []);
 
-  if (!isAuthenticated || submitted || !id || !note) return <Redirect to="/" />;
+  if (submitted || !id || !note) return <Redirect to="/notes" />;
   else
     return (
       <div className="container">
@@ -73,7 +73,7 @@ const EditNote = ({ isAuthenticated, notes, editNote, match }) => {
             </div>
             <div className="row center">
               <Link
-                to="/"
+                to="/notes"
                 className="waves-effect waves-light btn-large grey-text text-darken-4 grey lighten-3"
               >
                 Back to Notes

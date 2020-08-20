@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import MainLayout from './components/layout/_MainLayout';
-import Home from './pages/Home';
 import AddNote from './pages/AddNote';
 import NotFound from './pages/NotFound';
 import data from './_data';
@@ -9,6 +8,9 @@ import EditNote from './pages/EditNote';
 import Note from './pages/Note';
 import netlifyIdentity from 'netlify-identity-widget';
 import './App.css';
+import Landing from './pages/Landing';
+import Main from './pages/Main';
+import ProtectedRoute from './components/routing/ProtectedRoute';
 
 const netlifyAuth = {
   isAuthenticated: false,
@@ -36,18 +38,16 @@ function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const login = () => {
-    netlifyAuth.authenticate();
-    if (netlifyIdentity.currentUser()) {
-      setIsAuthenticated(true);
-    }
+    setIsAuthenticated(true);
   };
 
   const logout = () => {
-    netlifyAuth.signout(setIsAuthenticated(false));
+    setIsAuthenticated(false);
   };
 
   const addNote = (note) => {
     setNotes((prevState) => [...prevState, note]);
+    window.M.toast({ html: 'Note successfully added!', classes: 'green' });
   };
 
   const editNote = (id, updatedNote) => {
@@ -57,12 +57,14 @@ function App() {
         else return updatedNote;
       });
     });
+    window.M.toast({ html: 'Note successfully updated!', classes: 'green' });
   };
 
   const deleteNote = (id) => {
     setNotes((prevState) => {
       return prevState.filter((note) => note.id !== id);
     });
+    window.M.toast({ html: 'Note deleted!', classes: 'green' });
   };
 
   return (
@@ -77,41 +79,39 @@ function App() {
             exact
             path="/"
             render={() => (
-              <Home
-                isAuthenticated={isAuthenticated}
-                notes={notes}
-                deleteNote={deleteNote}
-              />
+              <Landing isAuthenticated={isAuthenticated} login={login} />
             )}
           />
-          <Route
+          <ProtectedRoute
+            exact
+            path="/notes"
+            isAuthenticated={isAuthenticated}
+            notes={notes}
+            deleteNote={deleteNote}
+            component={Main}
+          />
+          <ProtectedRoute
             exact
             path="/add"
-            render={() => (
-              <AddNote isAuthenticated={isAuthenticated} addNote={addNote} />
-            )}
+            isAuthenticated={isAuthenticated}
+            addNote={addNote}
+            component={AddNote}
           />
-          <Route
+          <ProtectedRoute
             exact
             path="/edit/:id"
-            render={() => (
-              <EditNote
-                isAuthenticated={isAuthenticated}
-                editNote={editNote}
-                notes={notes}
-              />
-            )}
+            isAuthenticated={isAuthenticated}
+            editNote={editNote}
+            notes={notes}
+            component={EditNote}
           />
-          <Route
+          <ProtectedRoute
             exact
             path="/note/:id"
-            render={() => (
-              <Note
-                isAuthenticated={isAuthenticated}
-                notes={notes}
-                deleteNote={deleteNote}
-              />
-            )}
+            isAuthenticated={isAuthenticated}
+            notes={notes}
+            deleteNote={deleteNote}
+            component={Note}
           />
           <Route component={NotFound} />
         </Switch>

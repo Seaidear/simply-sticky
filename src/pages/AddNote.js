@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { Redirect, Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { generateUUID } from '../helpers/uuid';
 
-const AddNote = ({ isAuthenticated, addNote }) => {
+const AddNote = ({ addNote }) => {
   const [submitted, setSubmitted] = useState(false);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
 
-  if (!isAuthenticated || submitted) return <Redirect to="/" />;
+  if (submitted) return <Redirect to="/notes" />;
   else
     return (
       <div className="container">
@@ -64,7 +64,7 @@ const AddNote = ({ isAuthenticated, addNote }) => {
             </div>
             <div className="row center">
               <Link
-                to="/"
+                to="/notes"
                 className="waves-effect waves-light btn-large grey-text text-darken-4 grey lighten-3"
               >
                 Back to Notes
