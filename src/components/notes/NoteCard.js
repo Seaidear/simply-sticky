@@ -1,8 +1,14 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { withRouter, Link } from 'react-router-dom';
 
 const NoteCard = ({ note, deleteNote, history }) => {
+  useEffect(() => {
+    const elements = refCard.current.querySelectorAll('.tooltipped');
+    window.M.Tooltip.init(elements);
+  }, []);
+
   const refCard = useRef(null);
+
   const createdDate = new Date(note.timestamp);
 
   return (
@@ -22,7 +28,9 @@ const NoteCard = ({ note, deleteNote, history }) => {
         <div className="card-action">
           <Link
             to={`/note/${note.id}`}
-            className="waves-effect waves-light grey-text text-darken-4 grey lighten-3 btn-small"
+            className="waves-effect waves-light grey-text text-darken-4 grey lighten-3 btn-small tooltipped"
+            data-position="bottom"
+            data-tooltip="View note"
           >
             <i className="small material-icons">remove_red_eye</i>
           </Link>
@@ -31,7 +39,9 @@ const NoteCard = ({ note, deleteNote, history }) => {
             onClick={() => {
               history.push(`/edit/${note.id}`);
             }}
-            className="waves-effect waves-light btn-small"
+            className="waves-effect waves-light btn-small tooltipped"
+            data-position="bottom"
+            data-tooltip="Edit note"
           >
             <i className="small material-icons">edit</i>
           </button>
@@ -42,7 +52,9 @@ const NoteCard = ({ note, deleteNote, history }) => {
               refCard.current.classList.add('animate__fadeOut');
               setTimeout(() => deleteNote(note.id), 500);
             }}
-            className="waves-effect waves-light red darken-2 btn-small del-btn"
+            className="waves-effect waves-light red darken-2 btn-small del-btn tooltipped"
+            data-position="bottom"
+            data-tooltip="Delete note"
           >
             <i className="material-icons">delete</i>
           </button>

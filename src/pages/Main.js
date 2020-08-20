@@ -4,8 +4,10 @@ import NoteCard from '../components/notes/NoteCard';
 
 const Main = ({ notes, deleteNote }) => {
   useEffect(() => {
-    document.getElementById('fixed-action-btn').classList.remove('scale-out');
-    document.getElementById('fixed-action-btn').classList.add('scale-în');
+    const fixedActionBtn = document.getElementById('fixed-action-btn');
+    fixedActionBtn.classList.remove('scale-out');
+    fixedActionBtn.classList.add('scale-în');
+    window.M.Tooltip.init(fixedActionBtn);
   }, []);
 
   return (
@@ -35,8 +37,10 @@ const Main = ({ notes, deleteNote }) => {
       <div
         id="fixed-action-btn"
         className="fixed-action-btn scale-transition scale-out"
+        data-position="left"
+        data-tooltip="Create new note"
       >
-        <Link to="/add" className="btn-floating btn-large red pulse ">
+        <Link to="/add" className="btn-floating btn-large red pulse">
           <i className="large material-icons">create</i>
         </Link>
       </div>
