@@ -50,7 +50,7 @@ const Navbar = ({ isAuthenticated, login, logout, register, user }) => {
       <nav>
         <div className="container">
           <div className="row">
-            <div className="col s12 m6">
+            <div className="col s12 m6 animate__animated animate__fadeIn">
               <Link to="/" className="brand-logo">
                 <img
                   src={logo}
@@ -62,7 +62,7 @@ const Navbar = ({ isAuthenticated, login, logout, register, user }) => {
               </Link>
             </div>
             <div className="col m6">
-              <ul className="right hide-on-med-and-down button-group">
+              <ul className="right hide-on-med-and-down button-group animate__animated animate__fadeIn">
                 <li>
                   <button
                     onClick={register}

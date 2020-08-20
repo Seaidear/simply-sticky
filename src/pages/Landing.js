@@ -7,7 +7,7 @@ const Landing = ({ isAuthenticated, login, register }) => {
     return (
       <div className="hero-img">
         <div className="hero-overlay">
-          <div className="container hero-content">
+          <div className="container hero-content animate__animated animate__fadeIn">
             <div className="row">
               <div className="col s12">
                 <h2 className="teal-text text-darken-1">

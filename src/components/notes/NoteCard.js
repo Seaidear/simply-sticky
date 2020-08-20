@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { withRouter, Link } from 'react-router-dom';
 
 const NoteCard = ({ note, deleteNote, history }) => {
+  const refCard = useRef(null);
   const createdDate = new Date(note.timestamp);
 
   return (
     <div className="col s12 m6">
-      <div className="card yellow lighten-2">
+      <div
+        ref={refCard}
+        className="card yellow lighten-2 animate__animated animate__fadeIn"
+      >
         <div className="card-content">
           <span className="card-title">{note.title}</span>
           <p>
@@ -33,9 +37,10 @@ const NoteCard = ({ note, deleteNote, history }) => {
           </button>
           {'  '}
           <button
-            onClick={(e) => {
-              e.preventDefault();
-              deleteNote(note.id);
+            onClick={() => {
+              refCard.current.classList.remove('animate__fadeIn');
+              refCard.current.classList.add('animate__fadeOut');
+              setTimeout(() => deleteNote(note.id), 500);
             }}
             className="waves-effect waves-light red darken-2 btn-small del-btn"
           >

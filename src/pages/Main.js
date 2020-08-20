@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import NoteCard from '../components/notes/NoteCard';
 
 const Main = ({ notes, deleteNote }) => {
+  useEffect(() => {
+    document.getElementById('fixed-action-btn').classList.remove('scale-out');
+    document.getElementById('fixed-action-btn').classList.add('scale-în');
+  }, []);
+
   return (
     <>
       <div className="container">
@@ -27,8 +32,11 @@ const Main = ({ notes, deleteNote }) => {
           )}
         </div>
       </div>
-      <div className="fixed-action-btn">
-        <Link to="/add" className="btn-floating btn-large red pulse">
+      <div
+        id="fixed-action-btn"
+        className="fixed-action-btn scale-transition scale-out"
+      >
+        <Link to="/add" className="btn-floating btn-large red pulse ">
           <i className="large material-icons">create</i>
         </Link>
       </div>
