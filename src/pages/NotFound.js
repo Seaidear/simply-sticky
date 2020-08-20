@@ -13,7 +13,7 @@ const NotFound = () => {
         textAlign: 'center',
       }}
     >
-      <h2>Oh noes! A big ol' 404!</h2>
+      <h2 className="teal-text text-darken-1">Oh noes! A big ol' 404!</h2>
       <h5>This page doesn't exist. Nothing to see here.</h5>
       <br />
       <Link to="/" className="waves-effect waves-light btn-large">

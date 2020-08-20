@@ -24,7 +24,7 @@ const Navbar = ({ isAuthenticated, login, logout, register, user }) => {
               </Link>
             </div>
             <div className="col s3 m6">
-              <ul className="right">
+              <ul className="right button-group">
                 {user && (
                   <li className="hide-on-med-and-down">
                     Welcome back, {user.user_metadata.full_name}

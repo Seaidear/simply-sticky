@@ -19,7 +19,9 @@ const Note = ({ notes, match, history, deleteNote }) => {
   return (
     <div className="container">
       <div className="row">
-        <h4 className="center">{title}</h4>
+        <h4 className="center" className="teal-text text-darken-1">
+          {title}
+        </h4>
       </div>
       <div className="row">
         <p>{content}</p>

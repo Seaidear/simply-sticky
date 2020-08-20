@@ -7,7 +7,7 @@ const Main = ({ notes, deleteNote }) => {
     <>
       <div className="container">
         <div className="row">
-          <h4 className="center">All Notes</h4>
+          <h4 className="center teal-text text-darken-1">All Notes</h4>
         </div>
         <div className="row">
           {!notes || notes === [] || notes.length === 0 ? (

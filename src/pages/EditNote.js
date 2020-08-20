@@ -22,7 +22,7 @@ const EditNote = ({ notes, editNote, match }) => {
     return (
       <div className="container">
         <div className="row">
-          <h4 className="center">Edit Note</h4>
+          <h4 className="center teal-text text-darken-1">Edit Note</h4>
         </div>
         <div className="row">
           <form
