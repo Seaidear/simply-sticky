@@ -28,6 +28,7 @@ function App() {
       loginUser(user);
       setIsAuthenticated(true);
       setUser(user);
+      netlifyIdentity.close();
     });
 
     netlifyIdentity.on('logout', () => {
