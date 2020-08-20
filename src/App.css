@@ -39,16 +39,19 @@ body {
   overflow-x: hidden;
 }
 
-#wrapper {
+#wrapper,
+.full-height {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
+  justify-content: center;
 }
 
 main {
   display: flex;
-  align-items: stretch;
   justify-content: center;
+  align-items: stretch;
+  height: 100%;
   flex: 1 0 auto;
 }
 
@@ -82,7 +85,6 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 100%;
   align-items: center;
   text-align: center;
 }

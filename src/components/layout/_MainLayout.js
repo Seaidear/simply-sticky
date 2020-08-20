@@ -4,10 +4,17 @@ import Footer from './Footer';
 
 const MainLayout = ({ isAuthenticated, children, login, logout }) => (
   <div id="wrapper">
-    <header>
-      <Navbar isAuthenticated={isAuthenticated} login={login} logout={logout} />
-    </header>
-    <main>{children}</main>
+    <div className="full-height">
+      <header>
+        <Navbar
+          isAuthenticated={isAuthenticated}
+          login={login}
+          logout={logout}
+        />
+      </header>
+      <main>{children}</main>
+    </div>
+
     {!isAuthenticated && <Footer />}
   </div>
 );
