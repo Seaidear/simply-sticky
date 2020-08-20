@@ -14,6 +14,7 @@ import './App.css';
 import axios from 'axios';
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true);
   const [notes, setNotes] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState(null);
@@ -53,7 +54,10 @@ function App() {
   };
 
   const getNotes = () => {
-    axios.get('/.netlify/functions/getNotes').then((res) => setNotes(res.data));
+    axios.get('/.netlify/functions/getNotes').then((res) => {
+      setNotes(res.data);
+      setIsLoading(false);
+    });
   };
 
   const addNote = (note) => {
@@ -103,6 +107,7 @@ function App() {
             exact
             path="/notes"
             isAuthenticated={isAuthenticated}
+            isLoading={isLoading}
             notes={notes}
             deleteNote={deleteNote}
             component={Main}

@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import NoteCard from '../components/notes/NoteCard';
+import Loader from '../components/layout/Loader';
 
-const Main = ({ notes, deleteNote }) => {
+const Main = ({ notes, deleteNote, isLoading }) => {
   useEffect(() => {
     const fixedActionBtn = document.getElementById('fixed-action-btn');
     fixedActionBtn.classList.remove('scale-out');
@@ -19,7 +20,16 @@ const Main = ({ notes, deleteNote }) => {
           <h4 className="center teal-text text-darken-1">All Notes</h4>
         </div>
         <div className="row">
-          {!notes || notes === [] || notes.length === 0 ? (
+          {isLoading ? (
+            <div
+              className="center"
+              style={{
+                marginTop: '30vh',
+              }}
+            >
+              <Loader />
+            </div>
+          ) : !notes || notes === [] || notes.length === 0 ? (
             <div
               style={{
                 marginTop: '30vh',
