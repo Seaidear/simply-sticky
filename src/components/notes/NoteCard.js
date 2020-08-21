@@ -27,7 +27,7 @@ const NoteCard = ({ note, deleteNote, history }) => {
         </div>
         <div className="card-action">
           <Link
-            to={`/note/${note.id}`}
+            to={`/note/${note._id}`}
             className="waves-effect waves-light grey-text text-darken-4 grey lighten-3 btn-small tooltipped"
             data-position="bottom"
             data-tooltip="View note"
@@ -37,7 +37,7 @@ const NoteCard = ({ note, deleteNote, history }) => {
           {'  '}
           <button
             onClick={() => {
-              history.push(`/edit/${note.id}`);
+              history.push(`/edit/${note._id}`);
             }}
             className="waves-effect waves-light btn-small tooltipped"
             data-position="bottom"
@@ -50,7 +50,7 @@ const NoteCard = ({ note, deleteNote, history }) => {
             onClick={() => {
               refCard.current.classList.remove('animate__fadeIn');
               refCard.current.classList.add('animate__fadeOut');
-              setTimeout(() => deleteNote(note.id), 500);
+              setTimeout(() => deleteNote(note._id), 500);
             }}
             className="waves-effect waves-light red darken-2 btn-small del-btn tooltipped"
             data-position="bottom"

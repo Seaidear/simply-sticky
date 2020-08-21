@@ -3,7 +3,7 @@ import { Link, withRouter, Redirect } from 'react-router-dom';
 
 const EditNote = ({ notes, editNote, match }) => {
   const id = match.params.id;
-  const note = notes.find((note) => note.id === id);
+  const note = notes.find((note) => note._id === id);
 
   const [submitted, setSubmitted] = useState(false);
   const [title, setTitle] = useState('');

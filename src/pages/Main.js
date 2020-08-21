@@ -40,7 +40,7 @@ const Main = ({ notes, deleteNote, isLoading }) => {
           ) : (
             <>
               {notes.map((note) => (
-                <NoteCard key={note.id} note={note} deleteNote={deleteNote} />
+                <NoteCard key={note._id} note={note} deleteNote={deleteNote} />
               ))}
             </>
           )}

@@ -3,7 +3,7 @@ import { Link, withRouter } from 'react-router-dom';
 
 const Note = ({ notes, match, history, deleteNote }) => {
   const id = match.params.id;
-  const note = notes.find((note) => note.id === id);
+  const note = notes.find((note) => note._id === id);
 
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
@@ -31,7 +31,7 @@ const Note = ({ notes, match, history, deleteNote }) => {
         <div className="row center">
           <button
             onClick={() => {
-              history.push(`/edit/${note.id}`);
+              history.push(`/edit/${note._id}`);
             }}
             className="waves-effect waves-light btn-large"
           >
