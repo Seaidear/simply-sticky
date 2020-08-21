@@ -20,6 +20,7 @@ const AddNote = ({ addNote }) => {
         </div>
         <div className="row">
           <form
+            method="POST"
             onSubmit={(e) => {
               e.preventDefault();
               const newNote = {
