@@ -54,7 +54,7 @@ const Navbar = ({ isAuthenticated, login, logout, register, user }) => {
             <div className="col s12 m6 animate__animated animate__fadeIn">
               <Link to="/" className="brand-logo">
                 <picture>
-                  <source srcset={logo_webp} type="image/webp" />
+                  <source srcSet={logo_webp} type="image/webp" />
                   <img
                     style={{ width: '1.75rem' }}
                     src={logo_png}
