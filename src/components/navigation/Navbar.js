@@ -1,5 +1,6 @@
 import React from 'react';
-import logo from '../../assets/logo.png';
+import logo_png from '../../assets/logo.png';
+import logo_webp from '../../assets/logo.webp';
 import { Link } from 'react-router-dom';
 
 const Navbar = ({ isAuthenticated, login, logout, register, user }) => {
@@ -15,7 +16,7 @@ const Navbar = ({ isAuthenticated, login, logout, register, user }) => {
                 style={{ marginLeft: '1rem' }}
               >
                 <img
-                  src={logo}
+                  src={logo_png}
                   alt="Noteworthy"
                   style={{ width: '1.75rem' }}
                   width="1.75rem"
@@ -52,12 +53,14 @@ const Navbar = ({ isAuthenticated, login, logout, register, user }) => {
           <div className="row">
             <div className="col s12 m6 animate__animated animate__fadeIn">
               <Link to="/" className="brand-logo">
-                <img
-                  src={logo}
-                  alt="Noteworthy"
-                  style={{ width: '1.75rem' }}
-                  width="1.75rem"
-                />{' '}
+                <picture>
+                  <source srcset={logo_webp} type="image/webp" />
+                  <img
+                    style={{ width: '1.75rem' }}
+                    src={logo_png}
+                    alt="Noteworthy"
+                  />
+                </picture>{' '}
                 <h1>Noteworthy</h1>
               </Link>
             </div>

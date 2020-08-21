@@ -73,6 +73,7 @@ main {
   flex-direction: column;
   justify-content: center;
   background-image: url('/hero.jpg');
+  background-image: url('/hero.webp');
   background-position-x: center;
   background-position-y: bottom;
   margin: 0;
