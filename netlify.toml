@@ -1,5 +1,5 @@
 [build]
-  functions = "lambda"
+  functions = "functions-build"
 
 [[redirects]]
   from = "/api/*"
