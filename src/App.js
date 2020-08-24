@@ -1,87 +1,120 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import axios from 'axios';
+import CryptoJS from 'crypto-js';
 import MainLayout from './components/layout/_MainLayout';
 import AddNote from './pages/AddNote';
 import NotFound from './pages/NotFound';
 import EditNote from './pages/EditNote';
 import Note from './pages/Note';
-import netlifyIdentity, { currentUser } from 'netlify-identity-widget';
 import Landing from './pages/Landing';
 import Main from './pages/Main';
 import ProtectedRoute from './components/routing/ProtectedRoute';
-import { loginUser, logoutUser } from './helpers/auth';
+import { useAuth } from './hooks/useAuth';
 import './App.css';
-import axios from 'axios';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [notes, setNotes] = useState(null);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [user, setUser] = useState(null);
+  const [isAuthenticated, user, login, register, logout] = useAuth();
 
   useEffect(() => {
-    if (currentUser()) {
-      setIsAuthenticated(true);
-      setUser(currentUser());
-      getNotes();
-    }
+    isAuthenticated && user && getNotes();
+    !isAuthenticated && !user && setNotes(null);
+    // eslint-disable-next-line
+  }, [user]);
 
-    netlifyIdentity.on('login', (user) => {
-      loginUser(user);
-      setIsAuthenticated(true);
-      setUser(user);
-      getNotes();
-
-      netlifyIdentity.close();
-    });
-
-    netlifyIdentity.on('logout', () => {
-      logoutUser();
-      setIsAuthenticated(false);
-      setUser(null);
-    });
-  }, []);
-
-  const login = () => {
-    netlifyIdentity.open('login');
-  };
-
-  const register = () => {
-    netlifyIdentity.open('signup');
-  };
-
-  const logout = async () => {
-    await netlifyIdentity.logout();
-  };
+  const getDecryptedNotes = (notes) =>
+    notes.map((note) => ({
+      ...note,
+      title: CryptoJS.AES.decrypt(note.title, user.id).toString(
+        CryptoJS.enc.Utf8,
+      ),
+      content: CryptoJS.AES.decrypt(note.content, user.id).toString(
+        CryptoJS.enc.Utf8,
+      ),
+    }));
 
   const getNotes = () => {
+    setIsLoading(true);
+
     const timestamp = new Date().getTime();
-    axios.get(`/.netlify/functions/getNotes?t=${timestamp}`).then((res) => {
-      setNotes(res.data);
-      setIsLoading(false);
-    });
+
+    axios
+      .get(`/api/notes?t=${timestamp}`)
+      .then((res) => {
+        setNotes(getDecryptedNotes(res.data));
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        window.M.toast({ html: `${err.message}`, classes: 'red' });
+        setIsLoading(false);
+      });
   };
 
   const addNote = (note) => {
-    setNotes((prevState) => [...prevState, note]);
-    window.M.toast({ html: 'Note successfully added!', classes: 'green' });
+    setIsLoading(true);
+
+    const timestamp = new Date().getTime();
+
+    axios
+      .post(`/api/notes?t=${timestamp}`, {
+        ...note,
+        userId: user.id,
+        title: CryptoJS.AES.encrypt(note.title, user.id).toString(),
+        content: CryptoJS.AES.encrypt(note.content, user.id).toString(),
+      })
+      .then((res) => {
+        setNotes(getDecryptedNotes(res.data));
+        window.M.toast({ html: 'Note successfully added!', classes: 'green' });
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        window.M.toast({ html: `${err.message}`, classes: 'red' });
+        setIsLoading(false);
+      });
   };
 
   const editNote = (id, updatedNote) => {
-    setNotes((prevState) => {
-      return prevState.map((note) => {
-        if (note.id !== id) return note;
-        else return updatedNote;
+    setIsLoading(true);
+
+    const timestamp = new Date().getTime();
+
+    axios
+      .put(`/api/notes?_id=${id}&t=${timestamp}`, {
+        ...updatedNote,
+        title: CryptoJS.AES.encrypt(updatedNote.title, user.id).toString(),
+        content: CryptoJS.AES.encrypt(updatedNote.content, user.id).toString(),
+      })
+      .then((res) => {
+        setNotes(getDecryptedNotes(res.data));
+        setIsLoading(false);
+        window.M.toast({
+          html: 'Note successfully updated!',
+          classes: 'green',
+        });
+      })
+      .catch((err) => {
+        window.M.toast({ html: `${err.message}`, classes: 'red' });
+        setIsLoading(false);
       });
-    });
-    window.M.toast({ html: 'Note successfully updated!', classes: 'green' });
   };
 
   const deleteNote = (id) => {
-    setNotes((prevState) => {
-      return prevState.filter((note) => note.id !== id);
-    });
-    window.M.toast({ html: 'Note deleted!', classes: 'green' });
+    const timestamp = new Date().getTime();
+
+    axios
+      .delete(`/api/notes?_id=${id}&t=${timestamp}`)
+      .then((res) => {
+        setNotes(getDecryptedNotes(res.data));
+        window.M.toast({
+          html: 'Note deleted!',
+          classes: 'green',
+        });
+      })
+      .catch((err) => {
+        window.M.toast({ html: `${err.message}`, classes: 'red' });
+      });
   };
 
   return (
