@@ -33,7 +33,6 @@ const EditNote = ({ notes, editNote, match }) => {
             onSubmit={(e) => {
               e.preventDefault();
               const updatedNote = {
-                id,
                 title,
                 content,
                 timestamp: new Date().getTime(),

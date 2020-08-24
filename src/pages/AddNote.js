@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Link, Redirect } from 'react-router-dom';
-import { generateUUID } from '../helpers/uuid';
 
 const AddNote = ({ addNote }) => {
   const [submitted, setSubmitted] = useState(false);
@@ -24,7 +23,6 @@ const AddNote = ({ addNote }) => {
             onSubmit={(e) => {
               e.preventDefault();
               const newNote = {
-                id: generateUUID(),
                 title,
                 content,
                 timestamp: new Date().getTime(),
