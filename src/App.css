@@ -54,16 +54,9 @@ main {
   flex: 1 0 auto;
 }
 
-.brand-logo {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  text-align: left;
-}
-
 .brand-logo h1 {
-  font-size: 1.65rem !important;
-  display: inline;
+  font-size: 1.55rem !important;
+  display: inline-block;
   margin: 0;
   padding: 0;
 }
@@ -73,9 +66,11 @@ main {
   flex-direction: column;
   justify-content: center;
   background-image: url('/hero.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
   background-image: url('/hero.webp');
   background-position-x: center;
-  background-position-y: bottom;
+  background-position-y: center;
   margin: 0;
   padding: 0;
   width: 100%;
@@ -83,8 +78,8 @@ main {
 
 .hero-overlay {
   background: linear-gradient(
-    rgba(255, 255, 255, 0.1),
-    rgba(255, 255, 255, 0.5)
+    rgba(255, 255, 255, 0.4),
+    rgba(255, 255, 255, 0.7)
   );
   height: 100%;
   display: flex;
