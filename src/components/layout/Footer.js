@@ -6,13 +6,17 @@ const Footer = () => {
       <div className="container">
         <div className="row">
           <div className="col l6 s12">
-            <h5 className="white-text">About Noteworthy</h5>
+            <h5 className="white-text">About SimplySticky</h5>
             <p className="grey-text text-lighten-4">
-              Make notes and organize your thoughts. The easy way. <br />
-              <br />
-              Noteworthy was built on a modern serverless architecture utilizing
-              Netlify cloud functions. Its user interface was built with a focus
-              on ease-of-use using the CSS framework Materialize, which is
+              Make notes and organize your thoughts the easy way with this
+              simple online sticky note solution. Your notes are securely stored
+              in our database and are encrypted twice for maximum security and
+              privacy.
+            </p>
+            <p className="grey-text text-lighten-4">
+              SimplySticky is built on a modern serverless architecture
+              utilizing cloud functions. Its user interface was built with a
+              focus on ease-of-use using the CSS framework Materialize, which is
               adhering to Material design guidelines.
             </p>
           </div>

@@ -15,9 +15,9 @@ const Landing = ({ isAuthenticated, login, register }) => {
             <div className="row">
               <div className="col s12">
                 <h2 className="teal-text text-darken-1">
-                  The quick and easy note-taking solution!
+                  The free easy <strong>sticky notes</strong> solution!
                 </h2>
-                <h5>All your thoughts secure in one place.</h5>
+                <h5>All your thoughts secured & encrypted in one place.</h5>
               </div>
             </div>
 
