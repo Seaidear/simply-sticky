@@ -35,17 +35,21 @@ exports.handler = async (event, context, callback) => {
 
     await connectDB();
 
-    conn.model(
-      'notes',
-      new mongoose.Schema({
-        title: String,
-        content: String,
-        userId: String,
-        timestamp: Number,
-      }),
-    );
+    let Note;
 
-    const Note = conn.model('notes');
+    try {
+      Note = conn.model('notes');
+    } catch (e) {
+      Note = conn.model(
+        'notes',
+        new mongoose.Schema({
+          title: String,
+          content: String,
+          userId: String,
+          timestamp: Number,
+        }),
+      );
+    }
 
     switch (event.httpMethod) {
       case 'GET':
