@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import CryptoJS from 'crypto-js';
+import axios from 'axios';
 import GlobalContext from './globalContext';
 import { useAuth } from '../../hooks/useAuth';
-import axios from 'axios';
 
 const AppState = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
