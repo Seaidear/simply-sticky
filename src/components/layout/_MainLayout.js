@@ -1,31 +1,23 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Navbar from '../navigation/Navbar';
 import Footer from './Footer';
+import GlobalContext from '../../context/global/globalContext';
 
-const MainLayout = ({
-  isAuthenticated,
-  children,
-  login,
-  logout,
-  register,
-  user,
-}) => (
-  <div className="full-height">
-    <div className="full-height">
-      <header>
-        <Navbar
-          isAuthenticated={isAuthenticated}
-          login={login}
-          logout={logout}
-          register={register}
-          user={user}
-        />
-      </header>
-      <main>{children}</main>
+const MainLayout = ({ children }) => {
+  const { isAuthenticated } = useContext(GlobalContext);
+
+  return (
+    <div>
+      <div className="full-height">
+        <header>
+          <Navbar />
+        </header>
+        <main>{children}</main>
+      </div>
+
+      {!isAuthenticated && <Footer />}
     </div>
-
-    {!isAuthenticated && <Footer />}
-  </div>
-);
+  );
+};
 
 export default MainLayout;

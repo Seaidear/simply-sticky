@@ -1,7 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { Redirect } from 'react-router-dom';
+import globalContext from '../context/global/globalContext';
 
-const Landing = ({ isAuthenticated, login, register }) => {
+const Landing = () => {
+  const { isAuthenticated, login, register } = useContext(globalContext);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -15,7 +18,7 @@ const Landing = ({ isAuthenticated, login, register }) => {
             <div className="row">
               <div className="col s12">
                 <h2 className="teal-text text-darken-1">
-                  The free easy <strong>sticky notes</strong> solution!
+                  The easy-peasy <strong>sticky notes</strong> app!
                 </h2>
                 <h5>All your thoughts secured & encrypted in one place.</h5>
               </div>

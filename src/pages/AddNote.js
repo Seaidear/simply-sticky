@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link, Redirect } from 'react-router-dom';
+import globalContext from '../context/global/globalContext';
 
-const AddNote = ({ addNote }) => {
+const AddNote = () => {
+  const { addNote } = useContext(globalContext);
+
   const [submitted, setSubmitted] = useState(false);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');

@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import logo from '../../logo.svg';
 import { Link } from 'react-router-dom';
+import GlobalContext from '../../context/global/globalContext';
 
-const Navbar = ({ isAuthenticated, login, logout, register, user }) => {
+const Navbar = () => {
+  const { isAuthenticated, login, logout, register, user } = useContext(
+    GlobalContext,
+  );
+
   if (isAuthenticated)
     return (
       <nav>

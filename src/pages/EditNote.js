@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link, withRouter, Redirect } from 'react-router-dom';
+import globalContext from '../context/global/globalContext';
 
-const EditNote = ({ notes, editNote, match }) => {
+const EditNote = ({ match }) => {
+  const { notes, editNote } = useContext(globalContext);
+
   const id = match.params.id;
   const note = notes.find((note) => note._id === id);
 

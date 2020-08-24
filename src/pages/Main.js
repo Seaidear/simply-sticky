@@ -1,9 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import NoteCard from '../components/notes/NoteCard';
 import Loader from '../components/layout/Loader';
+import globalContext from '../context/global/globalContext';
 
-const Main = ({ notes, deleteNote, isLoading }) => {
+const Main = () => {
+  const { notes, deleteNote, isLoading } = useContext(globalContext);
+
   useEffect(() => {
     const fixedActionBtn = document.getElementById('fixed-action-btn');
     fixedActionBtn.classList.remove('scale-out');
