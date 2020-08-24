@@ -16,7 +16,6 @@ export const useAuth = () => {
       loginUser(user);
       setIsAuthenticated(true);
       setUser(user);
-
       netlifyIdentity.close();
     });
 

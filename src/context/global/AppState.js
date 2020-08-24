@@ -32,7 +32,11 @@ const AppState = ({ children }) => {
     const timestamp = new Date().getTime();
 
     axios
-      .get(`/.netlify/functions/notes?t=${timestamp}`)
+      .get(`/.netlify/functions/notes?t=${timestamp}`, {
+        headers: {
+          Authorization: `Bearer ${user.token.accessToken}`,
+        },
+      })
       .then((res) => {
         setNotes(getDecryptedNotes(res.data));
         setIsLoading(false);
@@ -49,12 +53,20 @@ const AppState = ({ children }) => {
     const timestamp = new Date().getTime();
 
     axios
-      .post(`/.netlify/functions/notes?t=${timestamp}`, {
-        ...note,
-        userId: user.id,
-        title: CryptoJS.AES.encrypt(note.title, user.id).toString(),
-        content: CryptoJS.AES.encrypt(note.content, user.id).toString(),
-      })
+      .post(
+        `/.netlify/functions/notes?t=${timestamp}`,
+        {
+          ...note,
+          userId: user.id,
+          title: CryptoJS.AES.encrypt(note.title, user.id).toString(),
+          content: CryptoJS.AES.encrypt(note.content, user.id).toString(),
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${user.token.accessToken}`,
+          },
+        },
+      )
       .then((res) => {
         setNotes(getDecryptedNotes(res.data));
         window.M.toast({ html: 'Note successfully added!', classes: 'green' });
@@ -72,11 +84,22 @@ const AppState = ({ children }) => {
     const timestamp = new Date().getTime();
 
     axios
-      .put(`/.netlify/functions/notes?_id=${id}&t=${timestamp}`, {
-        ...updatedNote,
-        title: CryptoJS.AES.encrypt(updatedNote.title, user.id).toString(),
-        content: CryptoJS.AES.encrypt(updatedNote.content, user.id).toString(),
-      })
+      .put(
+        `/.netlify/functions/notes?_id=${id}&t=${timestamp}`,
+        {
+          ...updatedNote,
+          title: CryptoJS.AES.encrypt(updatedNote.title, user.id).toString(),
+          content: CryptoJS.AES.encrypt(
+            updatedNote.content,
+            user.id,
+          ).toString(),
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${user.token.accessToken}`,
+          },
+        },
+      )
       .then((res) => {
         setNotes(getDecryptedNotes(res.data));
         setIsLoading(false);
@@ -95,7 +118,11 @@ const AppState = ({ children }) => {
     const timestamp = new Date().getTime();
 
     axios
-      .delete(`/.netlify/functions/notes?_id=${id}&t=${timestamp}`)
+      .delete(`/.netlify/functions/notes?_id=${id}&t=${timestamp}`, {
+        headers: {
+          Authorization: `Bearer ${user.token.accessToken}`,
+        },
+      })
       .then((res) => {
         setNotes(getDecryptedNotes(res.data));
         window.M.toast({
