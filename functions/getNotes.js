@@ -19,8 +19,10 @@ exports.findAndDecryptNotes = async (Note) => {
 };
 
 exports.getNotes = async (event, context, callback, Note) => {
+  const userId = context.clientContext.user.id;
+
   callback(null, {
     statusCode: 200,
-    body: JSON.stringify(await this.findAndDecryptNotes(Note)),
+    body: JSON.stringify(await this.findAndDecryptNotes(Note, userId)),
   });
 };

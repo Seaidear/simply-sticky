@@ -4,6 +4,8 @@ const { findAndDecryptNotes } = require('./getNotes');
 const passphrase = process.env.CRYPTO_PASSPHRASE;
 
 exports.updateNote = async (event, context, callback, Note) => {
+  const userId = context.clientContext.user.id;
+
   const { title, content, timestamp } = JSON.parse(event.body);
 
   const noteId =
@@ -20,16 +22,23 @@ exports.updateNote = async (event, context, callback, Note) => {
         body: 'Invalid request!',
       });
     } else {
-      note.title = CryptoJS.AES.encrypt(title, passphrase).toString();
-      note.content = CryptoJS.AES.encrypt(content, passphrase).toString();
-      note.timestamp = timestamp;
+      if (note.userId === userId) {
+        note.title = CryptoJS.AES.encrypt(title, passphrase).toString();
+        note.content = CryptoJS.AES.encrypt(content, passphrase).toString();
+        note.timestamp = timestamp;
 
-      await note.save();
+        await note.save();
 
-      callback(null, {
-        statusCode: 200,
-        body: JSON.stringify(await findAndDecryptNotes(Note)),
-      });
+        callback(null, {
+          statusCode: 200,
+          body: JSON.stringify(await findAndDecryptNotes(Note)),
+        });
+      } else {
+        callback(null, {
+          statusCode: 401,
+          body: 'Unauthorized request!',
+        });
+      }
     }
   } else {
     callback(null, {
