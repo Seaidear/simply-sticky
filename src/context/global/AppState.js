@@ -34,7 +34,7 @@ const AppState = ({ children }) => {
     axios
       .get(`/.netlify/functions/notes?t=${timestamp}`, {
         headers: {
-          Authorization: `Bearer ${user.token.accessToken}`,
+          Authorization: `Bearer ${user.token.access_token}`,
         },
       })
       .then((res) => {
@@ -63,7 +63,7 @@ const AppState = ({ children }) => {
         },
         {
           headers: {
-            Authorization: `Bearer ${user.token.accessToken}`,
+            Authorization: `Bearer ${user.token.access_token}`,
           },
         },
       )
@@ -96,7 +96,7 @@ const AppState = ({ children }) => {
         },
         {
           headers: {
-            Authorization: `Bearer ${user.token.accessToken}`,
+            Authorization: `Bearer ${user.token.access_token}`,
           },
         },
       )
@@ -120,7 +120,7 @@ const AppState = ({ children }) => {
     axios
       .delete(`/.netlify/functions/notes?_id=${id}&t=${timestamp}`, {
         headers: {
-          Authorization: `Bearer ${user.token.accessToken}`,
+          Authorization: `Bearer ${user.token.access_token}`,
         },
       })
       .then((res) => {
