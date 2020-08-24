@@ -4,7 +4,7 @@ const { findAndDecryptNotes } = require('./getNotes');
 const passphrase = process.env.CRYPTO_PASSPHRASE;
 
 exports.updateNote = async (event, context, callback, Note) => {
-  const userId = context.clientContext.user.id;
+  const userId = context.clientContext.user.sub;
 
   const { title, content, timestamp } = JSON.parse(event.body);
 
@@ -31,7 +31,7 @@ exports.updateNote = async (event, context, callback, Note) => {
 
         callback(null, {
           statusCode: 200,
-          body: JSON.stringify(await findAndDecryptNotes(Note)),
+          body: JSON.stringify(await findAndDecryptNotes(Note, userId)),
         });
       } else {
         callback(null, {

@@ -1,7 +1,7 @@
 const { findAndDecryptNotes } = require('./getNotes');
 
 exports.deleteNote = async (event, context, callback, Note) => {
-  const userId = context.clientContext.user.id;
+  const userId = context.clientContext.user.sub;
 
   const noteId =
     event.multiValueQueryStringParameters._id &&
@@ -21,7 +21,7 @@ exports.deleteNote = async (event, context, callback, Note) => {
 
         callback(null, {
           statusCode: 200,
-          body: JSON.stringify(await findAndDecryptNotes(Note)),
+          body: JSON.stringify(await findAndDecryptNotes(Note, userId)),
         });
       } else {
         callback(null, {

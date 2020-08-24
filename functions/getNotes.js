@@ -2,8 +2,10 @@ const CryptoJS = require('crypto-js');
 
 const passphrase = process.env.CRYPTO_PASSPHRASE;
 
-exports.findAndDecryptNotes = async (Note) => {
-  const notes = await Note.find().sort({ date: 1 });
+exports.findAndDecryptNotes = async (Note, userId) => {
+  const notes = await Note.find({ userId }).sort({
+    date: 1,
+  });
 
   const decryptedNotes = notes.map((note) => ({
     ...note._doc,
@@ -19,7 +21,7 @@ exports.findAndDecryptNotes = async (Note) => {
 };
 
 exports.getNotes = async (event, context, callback, Note) => {
-  const userId = context.clientContext.user.id;
+  const userId = context.clientContext.user.sub;
 
   callback(null, {
     statusCode: 200,

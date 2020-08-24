@@ -18,7 +18,7 @@ exports.createNote = async (event, context, callback, Note) => {
 
     callback(null, {
       statusCode: 200,
-      body: JSON.stringify(await findAndDecryptNotes(Note)),
+      body: JSON.stringify(await findAndDecryptNotes(Note, userId)),
     });
   } else {
     callback(null, {
