@@ -15,7 +15,7 @@ const NoteCard = ({ note, deleteNote, history }) => {
     <div className="col s12 m6">
       <div
         ref={refCard}
-        className="card yellow lighten-2 animate__animated animate__fadeIn"
+        className="card yellow lighten-3 animate__animated animate__fadeIn"
       >
         <div className="card-content">
           <span className="card-title">{note.title}</span>
