@@ -9,8 +9,6 @@ export const useAuth = () => {
   useEffect(() => {
     checkAuth();
 
-    setInterval(checkAuth, 2500);
-
     netlifyIdentity.on('login', (user) => {
       loginUser(user);
       setIsAuthenticated(true);
