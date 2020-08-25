@@ -38,7 +38,7 @@ const AppState = ({ children }) => {
     const timestamp = new Date().getTime();
 
     axios
-      .get(`/.netlify/functions/notes?t=${timestamp}`)
+      .get(`/api/notes?t=${timestamp}`)
       .then((res) => {
         setNotes(getDecryptedNotes(res.data));
         setIsLoading(false);
@@ -55,7 +55,7 @@ const AppState = ({ children }) => {
     const timestamp = new Date().getTime();
 
     axios
-      .post(`/.netlify/functions/notes?t=${timestamp}`, {
+      .post(`/api/notes?t=${timestamp}`, {
         ...note,
         userId: user.id,
         title: CryptoJS.AES.encrypt(note.title, user.id).toString(),
@@ -78,7 +78,7 @@ const AppState = ({ children }) => {
     const timestamp = new Date().getTime();
 
     axios
-      .put(`/.netlify/functions/notes?_id=${id}&t=${timestamp}`, {
+      .put(`/api/notes?_id=${id}&t=${timestamp}`, {
         ...updatedNote,
         title: CryptoJS.AES.encrypt(updatedNote.title, user.id).toString(),
         content: CryptoJS.AES.encrypt(updatedNote.content, user.id).toString(),
@@ -101,7 +101,7 @@ const AppState = ({ children }) => {
     const timestamp = new Date().getTime();
 
     axios
-      .delete(`/.netlify/functions/notes?_id=${id}&t=${timestamp}`)
+      .delete(`/api/notes?_id=${id}&t=${timestamp}`)
       .then((res) => {
         setNotes(getDecryptedNotes(res.data));
         window.M.toast({
