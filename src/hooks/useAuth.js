@@ -7,10 +7,9 @@ export const useAuth = () => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    if (currentUser()) {
-      setIsAuthenticated(true);
-      setUser(currentUser());
-    }
+    checkAuth();
+
+    setInterval(checkAuth, 2500);
 
     netlifyIdentity.on('login', (user) => {
       loginUser(user);
@@ -26,6 +25,20 @@ export const useAuth = () => {
     });
     // eslint-disable-next-line
   }, []);
+
+  const checkAuth = () => {
+    const user = JSON.parse(localStorage.getItem('gotrue.user'));
+    const token = user && user.token.access_token;
+
+    if (currentUser() && token) {
+      setIsAuthenticated(true);
+      setUser(currentUser());
+    } else {
+      logout();
+      setIsAuthenticated(false);
+      setUser(null);
+    }
+  };
 
   const login = () => {
     netlifyIdentity.open('login');
