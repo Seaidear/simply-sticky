@@ -4,7 +4,7 @@ const passphrase = process.env.CRYPTO_PASSPHRASE;
 
 exports.findAndDecryptNotes = async (Note, userId) => {
   const notes = await Note.find({ userId }).sort({
-    date: 1,
+    timestamp: -1,
   });
 
   const decryptedNotes = notes.map((note) => ({
