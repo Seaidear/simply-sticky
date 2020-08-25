@@ -18,7 +18,7 @@ const Landing = () => {
             <div className="row">
               <div className="col s12">
                 <h2 className="teal-text text-darken-1">
-                  The easy-peasy <strong>sticky notes</strong> app!
+                  The <strong>easy-peasy sticky notes</strong> app!
                 </h2>
                 <h5>All your thoughts secured & encrypted in one place.</h5>
               </div>
