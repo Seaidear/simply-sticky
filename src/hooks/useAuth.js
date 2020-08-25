@@ -9,6 +9,8 @@ export const useAuth = () => {
   useEffect(() => {
     checkAuth();
 
+    setInterval(checkAuth, 2500);
+
     netlifyIdentity.on('login', (user) => {
       loginUser(user);
       setIsAuthenticated(true);
@@ -31,8 +33,10 @@ export const useAuth = () => {
     if (currentUser() && token) {
       setIsAuthenticated(true);
       setUser(currentUser());
-    } else {
+    } else if (currentUser() && !token) {
       logout();
+      netlifyIdentity.open('login');
+    } else {
       setIsAuthenticated(false);
       setUser(null);
     }
