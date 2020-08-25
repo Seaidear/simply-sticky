@@ -16,7 +16,6 @@ exports.updateNote = async (event, context, callback, Note) => {
     const note = await Note.findById(noteId);
 
     if (!noteId.match(/^[0-9a-fA-F]{24}$/) || !note) {
-      console.log('Invalid request');
       callback(null, {
         statusCode: 400,
         body: 'Invalid request!',

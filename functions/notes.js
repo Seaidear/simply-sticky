@@ -9,8 +9,6 @@ const MONGO_URI = process.env.MONGO_URI;
 
 exports.handler = async (event, context, callback) => {
   const { user } = context.clientContext;
-  console.log(context.clientContext);
-  console.log(event);
 
   if (user) {
     context.callbackWaitsForEmptyEventLoop = false;
