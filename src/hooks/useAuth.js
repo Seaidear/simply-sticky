@@ -29,11 +29,13 @@ export const useAuth = () => {
   const checkAuth = () => {
     const user = JSON.parse(localStorage.getItem('gotrue.user'));
     const token = user && user.token.access_token;
+    const tokenExpiresAt = user && user.token.expires_at;
+    const currentTime = new Date().getTime();
 
-    if (currentUser() && token) {
+    if (currentUser() && token && tokenExpiresAt > currentTime) {
       setIsAuthenticated(true);
       setUser(currentUser());
-    } else if (currentUser() && !token) {
+    } else if (currentUser() && (!token || tokenExpiresAt < currentTime)) {
       logout();
       netlifyIdentity.open('login');
     } else {
