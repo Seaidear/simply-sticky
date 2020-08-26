@@ -5,7 +5,6 @@ import netlifyIdentity from 'netlify-identity-widget';
 import * as serviceWorker from './serviceWorker';
 import App from './App';
 import initCookieBanner from './helpers/cookies';
-import 'materialize-css/dist/css/materialize.css';
 import 'materialize-css/dist/js/materialize.js';
 
 // Auto-init all Materialize JS widgets
