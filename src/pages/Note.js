@@ -18,7 +18,6 @@ const Note = ({ match, history }) => {
     }
 
     window.scrollTo(0, 0);
-
     // eslint-disable-next-line
   }, []);
 
