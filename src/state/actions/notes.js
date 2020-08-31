@@ -3,14 +3,13 @@ import CryptoJS from 'crypto-js';
 import axios from 'axios';
 import { setLoading } from './loading';
 
-export const getNotes = () => async (dispatch, state) => {
+export const getNotes = () => async (dispatch, getState) => {
   dispatch(setLoading(true));
 
   try {
     const res = await axios.get(`/api/notes?t=${getCurrentTimeStamp()}`);
-    console.log(state);
 
-    const decryptedNotes = getDecryptedNotes(res.data, state.auth.user);
+    const decryptedNotes = getDecryptedNotes(res.data, getState().auth.user);
 
     dispatch({
       type: Types.GET_NOTES,
@@ -23,20 +22,23 @@ export const getNotes = () => async (dispatch, state) => {
   dispatch(setLoading(false));
 };
 
-export const createNote = (note) => async (dispatch, state) => {
+export const createNote = (note) => async (dispatch, getState) => {
   dispatch(setLoading(true));
 
   try {
     const res = await axios.post(`/api/notes?t=${getCurrentTimeStamp()}`, {
       ...note,
-      userId: state.auth.user.id,
-      title: CryptoJS.AES.encrypt(note.title, state.auth.user.id).toString(),
+      userId: getState().auth.user.id,
+      title: CryptoJS.AES.encrypt(
+        note.title,
+        getState().auth.user.id,
+      ).toString(),
       content: CryptoJS.AES.encrypt(
         note.content,
-        state.auth.user.id,
+        getState().auth.user.id,
       ).toString(),
     });
-    const decryptedNotes = getDecryptedNotes(res.data, state.auth.user);
+    const decryptedNotes = getDecryptedNotes(res.data, getState().auth.user);
 
     dispatch({
       type: Types.CREATE_NOTE,
@@ -51,7 +53,7 @@ export const createNote = (note) => async (dispatch, state) => {
   dispatch(setLoading(false));
 };
 
-export const updateNote = (id, updatedNote) => async (dispatch, state) => {
+export const updateNote = (id, updatedNote) => async (dispatch, getState) => {
   dispatch(setLoading(true));
 
   try {
@@ -61,15 +63,15 @@ export const updateNote = (id, updatedNote) => async (dispatch, state) => {
         ...updatedNote,
         title: CryptoJS.AES.encrypt(
           updatedNote.title,
-          state.auth.user.id,
+          getState().auth.user.id,
         ).toString(),
         content: CryptoJS.AES.encrypt(
           updatedNote.content,
-          state.auth.user.id,
+          getState().auth.user.id,
         ).toString(),
       },
     );
-    const decryptedNotes = getDecryptedNotes(res.data, state.auth.user);
+    const decryptedNotes = getDecryptedNotes(res.data, getState().auth.user);
 
     dispatch({
       type: Types.UPDATE_NOTE,
@@ -87,14 +89,14 @@ export const updateNote = (id, updatedNote) => async (dispatch, state) => {
   dispatch(setLoading(false));
 };
 
-export const deleteNote = (id) => async (dispatch, state) => {
+export const deleteNote = (id) => async (dispatch, getState) => {
   dispatch(setLoading(true));
 
   try {
     const res = await axios.delete(
       `/api/notes?_id=${id}&t=${getCurrentTimeStamp()}`,
     );
-    const decryptedNotes = getDecryptedNotes(res.data, state.auth.user);
+    const decryptedNotes = getDecryptedNotes(res.data, getState().auth.user);
 
     dispatch({
       type: Types.GET_NOTES,

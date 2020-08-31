@@ -3,10 +3,8 @@ import { loginUser as login, logoutUser as logout } from '../../helpers/auth';
 import { getNotes } from './notes';
 import axios from 'axios';
 
-export const loginUser = (user) => (dispatch, state) => {
-  console.log(state);
-
-  if (!state.isAuthenticated && !state.user) {
+export const loginUser = (user) => (dispatch, getState) => {
+  if (!getState().auth.isAuthenticated && !getState().auth.user) {
     login(user);
 
     axios.defaults.headers.common[
@@ -25,8 +23,8 @@ export const loginUser = (user) => (dispatch, state) => {
   }
 };
 
-export const logoutUser = () => (dispatch, state) => {
-  if (state.isAuthenticated && state.user) {
+export const logoutUser = () => (dispatch, getState) => {
+  if (getState().auth.isAuthenticated && getState().auth.user) {
     logout();
     dispatch({
       type: Types.LOGOUT_USER,
