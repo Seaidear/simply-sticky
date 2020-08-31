@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import logo from '../../logo.svg';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { useAuth } from '../../hooks/useAuth';
+import authContext from '../context/auth/authContext';
 
 const Navbar = () => {
   const auth = useSelector((state) => state.auth);
   const { isAuthenticated, user } = auth;
-  const [login, logout, register] = useAuth();
+  const { login, logout, register } = useContext(authContext);
 
   return (
     <>

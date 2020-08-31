@@ -9,7 +9,7 @@ export const useAuth = () => {
   useEffect(() => {
     checkAuth();
 
-    // const checkAuthInterval = setInterval(checkAuth, 2500);
+    const checkAuthInterval = setInterval(checkAuth, 2500);
 
     netlifyIdentity.on('login', (user) => {
       dispatch(loginUser(user));
@@ -21,7 +21,7 @@ export const useAuth = () => {
     });
 
     return () => {
-      // clearInterval(checkAuthInterval);
+      clearInterval(checkAuthInterval);
     };
     // eslint-disable-next-line
   }, []);
