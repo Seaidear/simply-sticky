@@ -1,10 +1,11 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import Navbar from '../navigation/Navbar';
 import Footer from './Footer';
-import GlobalContext from '../../context/global/globalContext';
+import { useSelector } from 'react-redux';
 
 const MainLayout = ({ children }) => {
-  const { isAuthenticated } = useContext(GlobalContext);
+  const auth = useSelector((state) => state.auth);
+  const { isAuthenticated } = auth;
 
   return (
     <div>

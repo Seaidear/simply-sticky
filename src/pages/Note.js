@@ -1,9 +1,11 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import globalContext from '../context/global/globalContext';
+import { deleteNote } from '../state/actions/notes';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Note = ({ match, history }) => {
-  const { notes, deleteNote } = useContext(globalContext);
+  const dispatch = useDispatch();
+  const notes = useSelector((state) => state.notes);
 
   const id = match.params.id;
   const note = notes.find((note) => note._id === id);
@@ -43,7 +45,7 @@ const Note = ({ match, history }) => {
         <div className="row center">
           <button
             onClick={() => {
-              deleteNote(id);
+              dispatch(deleteNote(id));
               history.push(`/`);
             }}
             className="waves-effect waves-light red darken-2 btn-large"

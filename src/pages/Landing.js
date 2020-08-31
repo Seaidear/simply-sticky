@@ -1,9 +1,12 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
-import globalContext from '../context/global/globalContext';
+import { useAuth } from '../hooks/useAuth';
+import { useSelector } from 'react-redux';
 
 const Landing = () => {
-  const { isAuthenticated, login, register } = useContext(globalContext);
+  const auth = useSelector((state) => state.auth);
+  const { isAuthenticated } = auth;
+  const [login, register] = useAuth();
 
   useEffect(() => {
     window.scrollTo(0, 0);

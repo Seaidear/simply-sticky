@@ -1,12 +1,13 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import logo from '../../logo.svg';
 import { Link } from 'react-router-dom';
-import GlobalContext from '../../context/global/globalContext';
+import { useSelector } from 'react-redux';
+import { useAuth } from '../../hooks/useAuth';
 
 const Navbar = () => {
-  const { isAuthenticated, login, logout, register, user } = useContext(
-    GlobalContext,
-  );
+  const auth = useSelector((state) => state.auth);
+  const { isAuthenticated, user } = auth;
+  const [login, logout, register] = useAuth();
 
   return (
     <>

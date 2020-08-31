@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, Redirect } from 'react-router-dom';
-import globalContext from '../context/global/globalContext';
+import { useDispatch } from 'react-redux';
+import { createNote } from '../state/actions/notes';
 
 const AddNote = () => {
-  const { addNote } = useContext(globalContext);
+  const dispatch = useDispatch();
 
   const [submitted, setSubmitted] = useState(false);
   const [title, setTitle] = useState('');
@@ -30,7 +31,7 @@ const AddNote = () => {
                 content,
                 timestamp: new Date().getTime(),
               };
-              addNote(newNote);
+              dispatch(createNote(newNote));
               setSubmitted(true);
             }}
           >

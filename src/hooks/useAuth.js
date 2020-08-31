@@ -1,31 +1,27 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import netlifyIdentity, { currentUser } from 'netlify-identity-widget';
-import { logoutUser, loginUser } from '../helpers/auth';
+import { loginUser, logoutUser } from '../state/actions/auth';
+import { useDispatch } from 'react-redux';
 
 export const useAuth = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [user, setUser] = useState(null);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     checkAuth();
 
-    const checkAuthInterval = setInterval(checkAuth, 2500);
+    // const checkAuthInterval = setInterval(checkAuth, 2500);
 
     netlifyIdentity.on('login', (user) => {
-      loginUser(user);
-      setIsAuthenticated(true);
-      setUser(user);
+      dispatch(loginUser(user));
       netlifyIdentity.close();
     });
 
     netlifyIdentity.on('logout', () => {
-      logoutUser();
-      setIsAuthenticated(false);
-      setUser(null);
+      dispatch(logoutUser());
     });
 
     return () => {
-      clearInterval(checkAuthInterval);
+      // clearInterval(checkAuthInterval);
     };
     // eslint-disable-next-line
   }, []);
@@ -37,14 +33,12 @@ export const useAuth = () => {
     const currentTime = new Date().getTime();
 
     if (currentUser() && token && tokenExpiresAt > currentTime) {
-      setIsAuthenticated(true);
-      setUser(currentUser());
+      dispatch(loginUser(user));
     } else if (currentUser() && (!token || tokenExpiresAt < currentTime)) {
       logout();
       netlifyIdentity.open('login');
     } else {
-      setIsAuthenticated(false);
-      setUser(null);
+      dispatch(logoutUser());
     }
   };
 
@@ -60,5 +54,5 @@ export const useAuth = () => {
     await netlifyIdentity.logout();
   };
 
-  return [isAuthenticated, user, login, register, logout];
+  return [login, register, logout];
 };

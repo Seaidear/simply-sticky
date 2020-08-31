@@ -1,9 +1,11 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, withRouter, Redirect } from 'react-router-dom';
-import globalContext from '../context/global/globalContext';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateNote } from '../state/actions/notes';
 
 const EditNote = ({ match }) => {
-  const { notes, editNote } = useContext(globalContext);
+  const dispatch = useDispatch();
+  const notes = useSelector((state) => state.notes);
 
   const id = match.params.id;
   const note = notes.find((note) => note._id === id);
@@ -40,7 +42,7 @@ const EditNote = ({ match }) => {
                 content,
                 timestamp: new Date().getTime(),
               };
-              editNote(id, updatedNote);
+              dispatch(updateNote(id, updatedNote));
               setSubmitted(true);
             }}
           >

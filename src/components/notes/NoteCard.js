@@ -1,7 +1,10 @@
 import React, { useRef, useEffect } from 'react';
 import { withRouter, Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 const NoteCard = ({ note, deleteNote, history }) => {
+  const dispatch = useDispatch();
+
   useEffect(() => {
     const elements = refCard.current.querySelectorAll('.tooltipped');
     window.M.Tooltip.init(elements);
@@ -50,7 +53,7 @@ const NoteCard = ({ note, deleteNote, history }) => {
             onClick={() => {
               refCard.current.classList.remove('animate__fadeIn');
               refCard.current.classList.add('animate__fadeOut');
-              setTimeout(() => deleteNote(note._id), 500);
+              setTimeout(() => dispatch(deleteNote(note._id)), 500);
             }}
             className="waves-effect waves-light red darken-2 btn-small del-btn tooltipped"
             data-position="bottom"

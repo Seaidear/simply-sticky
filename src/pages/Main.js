@@ -1,11 +1,13 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import NoteCard from '../components/notes/NoteCard';
 import Loader from '../components/layout/Loader';
-import globalContext from '../context/global/globalContext';
+import { deleteNote } from '../state/actions/notes';
+import { useSelector } from 'react-redux';
 
 const Main = () => {
-  const { notes, deleteNote, isLoading } = useContext(globalContext);
+  const notes = useSelector((state) => state.notes);
+  const isLoading = useSelector((state) => state.isLoading);
 
   useEffect(() => {
     const fixedActionBtn = document.getElementById('fixed-action-btn');
@@ -14,6 +16,7 @@ const Main = () => {
     window.M.Tooltip.init(fixedActionBtn);
 
     window.scrollTo(0, 0);
+    // eslint-disable-next-line
   }, []);
 
   return (
