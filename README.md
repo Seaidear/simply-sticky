@@ -10,7 +10,7 @@ SimpliSticky is a productivity (note-taking) app build with React which is utili
   - Custom Hook to interact with Netlify Identity included
 - Full CRUD-functionality through serverless API-endpoints utilizing Netlify Functions
   - Data is secured through double encryption - both client- & server-side
-- Global App-state managed via the React Context API
+- Global App-state managed via Redux + AuthProvider managed via React Context API
 - UI implemented using React & Materialize CSS
 - Internal Routing via React Router (incl. protected routes)
 - Subtle Animations through Animate.css
