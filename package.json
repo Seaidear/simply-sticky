@@ -24,9 +24,9 @@
     "redux-thunk": "^2.3.0"
   },
   "scripts": {
-    "start": "craco start",
-    "build": "craco build",
-    "test": "craco test",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
     "eject": "react-scripts eject",
     "dev": "netlify dev",
     "lambda-serve": "netlify-lambda serve functions",
