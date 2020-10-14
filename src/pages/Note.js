@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { deleteNote } from '../state/actions/notes';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -66,4 +66,4 @@ const Note = ({ match, history }) => {
   );
 };
 
-export default withRouter(Note);
+export default Note;

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, withRouter, Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateNote } from '../state/actions/notes';
 
@@ -93,4 +93,4 @@ const EditNote = ({ match }) => {
     );
 };
 
-export default withRouter(EditNote);
+export default EditNote;
